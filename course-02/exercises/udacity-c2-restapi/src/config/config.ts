@@ -19,7 +19,8 @@ export const config = {
     "aws_region": process.env.DB_REGION,
     "aws_s3_region": process.env.S3_REGION,
     "aws_profile": process.env.AWS_PROFILE,
-    "aws_media_bucket": process.env.S3_BUCKET
+    "aws_media_bucket": process.env.S3_BUCKET,
+    "aws_jwt_secret" : process.env.AWS_JWT_SECRET
   },
   "prod": {
     "username": "",
