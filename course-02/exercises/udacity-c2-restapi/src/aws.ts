@@ -1,19 +1,23 @@
 import AWS = require('aws-sdk');
 import { config } from './config/config';
+import { constants } from './constants';
 
 const c = config.dev;
 
 console.log(c);
 
-const getObjectCommand = 'getObject';
-const putObjectCommand = 'putObject';
+const getObjectCommand = constants.s3.commands.get;
+const putObjectCommand = constants.s3.commands.put;
 
 //Configure AWS
-var credentials = new AWS.SharedIniFileCredentials({ profile: c.aws_profile });
-AWS.config.credentials = credentials;
+
+if (c.aws_profile !== "DEPLOYED") {
+  var credentials = new AWS.SharedIniFileCredentials({ profile: c.aws_profile });
+  AWS.config.credentials = credentials;
+}
 
 export const s3 = new AWS.S3({
-  signatureVersion: 'v4',
+  signatureVersion: constants.s3.signatureVersion,
   region: c.aws_s3_region,
   params: { Bucket: c.aws_media_bucket }
 });
