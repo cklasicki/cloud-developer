@@ -43,7 +43,7 @@ import { filterImageFromURL, deleteLocalFiles } from './util/util';
       });
     } catch (err) {
       console.log(`Error: ${err}`);
-      return res.status(404).send({ message: `Provided url=${image_url} is malformed` });
+      return res.status(500).send({ message: `Internal server error` });
     }
   });
   //! END @TODO1
