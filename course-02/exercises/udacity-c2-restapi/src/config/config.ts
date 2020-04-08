@@ -1,15 +1,4 @@
 export const config = {
-  "debug": {
-    "username": "udagramczarekdev",
-    "password": "udagramczarekdev",
-    "database": "udagramczarekdev",
-    "host": "udagramczarekdev.co1x4xeosg2t.us-east-1.rds.amazonaws.com",
-    "dialect": "postgres",
-    "aws_region": "us-east-1",
-    "aws_s3_region": "eu-central-1",
-    "aws_media_bucket": "udagrammediadev",
-    "aws_profile": "default"
-  },
   "dev": {
     "username": process.env.DB_USERNAME,
     "password": process.env.DB_PASSWORD,

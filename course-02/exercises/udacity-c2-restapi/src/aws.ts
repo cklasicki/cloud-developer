@@ -4,8 +4,6 @@ import { constants } from './constants';
 
 const c = config.dev;
 
-console.log(c);
-
 const getObjectCommand = constants.s3.commands.get;
 const putObjectCommand = constants.s3.commands.put;
 
