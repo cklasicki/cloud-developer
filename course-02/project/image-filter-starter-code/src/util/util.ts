@@ -1,5 +1,6 @@
 import fs from 'fs';
 import Jimp = require('jimp');
+import validUrl from 'valid-url';
 
 // filterImageFromURL
 // helper function to download, filter, and save the filtered image locally
@@ -31,8 +32,22 @@ export async function deleteLocalFiles(files: Array<string>) {
     for (let file of files) {
         try {
             fs.unlinkSync(file);
-        } catch(err) {
+        } catch (err) {
             console.log(`Could not delete resource on fs. Error: ${err}`);
         }
     }
+}
+
+export function urlNotValid(url: string): boolean {
+    return !validUrl.isWebUri(url) || !isPictureExtension(url);
+}
+
+export function isPictureExtension(url: string): boolean {
+
+    const suffixes = ['.jpg', '.jpeg', '.png'];
+
+    const found = suffixes.find(s => {
+        return url.endsWith(s);
+    });
+    return found !== undefined;
 }

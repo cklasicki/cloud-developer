@@ -1,7 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import validUrl from 'valid-url';
-import { filterImageFromURL, deleteLocalFiles } from './util/util';
+import { filterImageFromURL, deleteLocalFiles, urlNotValid } from './util/util';
 
 (async () => {
 
@@ -32,8 +31,8 @@ import { filterImageFromURL, deleteLocalFiles } from './util/util';
   app.get("/filteredimage", async (req, res) => {
     const { image_url } = req.query;
 
-    if (notValidUrl(image_url)) {
-      return res.status(404).send({ message: `Provided url=${image_url} is not valid` });
+    if (urlNotValid(image_url)) {
+      return res.status(422).send({ message: `Provided url=${image_url} is not valid.` });
     }
 
     try {
@@ -60,7 +59,3 @@ import { filterImageFromURL, deleteLocalFiles } from './util/util';
     console.log(`press CTRL+C to stop server`);
   });
 })();
-
-function notValidUrl(url: string): boolean {
-  return !validUrl.isWebUri(url);
-}
