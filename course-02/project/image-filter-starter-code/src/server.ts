@@ -35,15 +35,28 @@ import { filterImageFromURL, deleteLocalFiles, urlNotValid } from './util/util';
       return res.status(422).send({ message: `Provided url=${image_url} is not valid.` });
     }
 
-    try {
-      const filteredpath = await filterImageFromURL(image_url);
-      return res.status(201).sendFile(filteredpath, () => {
-        deleteLocalFiles([filteredpath]);
+    filterImageFromURL(image_url)
+      .then(filteredpath => {
+        return res.status(201).sendFile(filteredpath, () => {
+          deleteLocalFiles([filteredpath]);
+        });
+      })
+      .catch((error) => {
+        console.log(error.message);
+        res.status(500).send({ message: `Internal server error` });
       });
-    } catch (err) {
-      console.log(`Error: ${err}`);
-      return res.status(500).send({ message: `Internal server error` });
-    }
+
+
+    // try {
+    //   const filteredpath = await filterImageFromURL(image_url);
+    //   return res.status(201).sendFile(filteredpath, () => {
+    //     deleteLocalFiles([filteredpath]);
+    //   });
+    // } catch (err) {
+    //   console.log('KURWA !!!!!');
+
+    //   return res.status(500).send({ message: `Internal server error` });
+    // }
   });
   //! END @TODO1
 
