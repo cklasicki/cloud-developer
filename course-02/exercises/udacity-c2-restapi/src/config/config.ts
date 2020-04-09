@@ -1,3 +1,14 @@
+import dotenv from 'dotenv';
+import fs from 'fs';
+
+dotenv.config();
+
+const envConf = dotenv.parse(fs.readFileSync('dev.env'));
+
+for (const k in envConf) {
+  process.env[k] = envConf[k];
+}
+
 export const config = {
   "dev": {
     "username": process.env.DB_USERNAME,
@@ -9,13 +20,18 @@ export const config = {
     "aws_s3_region": process.env.S3_REGION,
     "aws_profile": process.env.AWS_PROFILE,
     "aws_media_bucket": process.env.S3_BUCKET,
-    "aws_jwt_secret" : process.env.AWS_JWT_SECRET
-  },
-  "prod": {
-    "username": "",
-    "password": "",
-    "database": "udagram_prod",
-    "host": "",
-    "dialect": "postgres"
+    "aws_jwt_secret": process.env.AWS_JWT_SECRET,
+    "image_endpoint": {
+      "local": {
+        "protocol": "http",
+        "host": "localhost",
+        "port": 8082
+      },
+      "remote": {
+        "protocol": process.env.IMAGE_PROTOCOL || "http",
+        "host": process.env.IMAGE_HOST || "image.udagram.fun",
+        "port": process.env.IMAGE_PORT || 0
+      }
+    }
   }
 }

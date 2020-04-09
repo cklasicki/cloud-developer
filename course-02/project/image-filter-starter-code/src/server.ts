@@ -45,18 +45,6 @@ import { filterImageFromURL, deleteLocalFiles, urlNotValid } from './util/util';
         console.log(error.message);
         res.status(500).send({ message: `Internal server error` });
       });
-
-
-    // try {
-    //   const filteredpath = await filterImageFromURL(image_url);
-    //   return res.status(201).sendFile(filteredpath, () => {
-    //     deleteLocalFiles([filteredpath]);
-    //   });
-    // } catch (err) {
-    //   console.log('KURWA !!!!!');
-
-    //   return res.status(500).send({ message: `Internal server error` });
-    // }
   });
   //! END @TODO1
 
