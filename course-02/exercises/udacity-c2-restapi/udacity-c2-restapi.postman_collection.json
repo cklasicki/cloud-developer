@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "90c44738-86d0-440c-ac60-dcb7b70fb9e8",
+		"_postman_id": "2da7dc2c-2834-4ab2-9889-96b3c3450ead",
 		"name": "udacity-c2-restapi",
 		"description": "Requests that should work!",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -37,10 +37,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{host}}/api/v0/feed",
 							"host": [
@@ -84,10 +80,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{host}}/api/v0/feed/:id",
 							"host": [
@@ -121,10 +113,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/v0/feed/:id",
 									"host": [
@@ -409,7 +397,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Unauthorized",
@@ -456,7 +445,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Authorized",
@@ -568,6 +558,255 @@
 						"description": "Post a new item to the feed"
 					},
 					"response": []
+				},
+				{
+					"name": "/api/v0/feed authorized getPutString",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1ad01629-c164-41ef-9d19-0a5fd13274af",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"The post returns a new item with an id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.not.eql(null);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"caption\": \"Hello\",\n    \"url\": \"test.jpg\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/v0/feed/signed-url/:fileName",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"feed",
+								"signed-url",
+								":fileName"
+							],
+							"variable": [
+								{
+									"key": "fileName",
+									"value": ""
+								}
+							]
+						},
+						"description": "Retrieve the URL to put resource in S3 bucket"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v0/feed authorized update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1ad01629-c164-41ef-9d19-0a5fd13274af",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"The post returns a new item with an id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.not.eql(null);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"caption\": \"Hello\",\n    \"url\": \"test.jpg\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/v0/feed",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"feed"
+							]
+						},
+						"description": "Post a new item to the feed"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve filtered image",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1ad01629-c164-41ef-9d19-0a5fd13274af",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"The post returns a new item with an id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.not.eql(null);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/v0/image/filterImage?image_url=https://www.carlrippon.com/static/7afad7912a3c4797f5cfd1798fa1bf83/e937d/animal-canine-cold-1800314-1024x683.jpg",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v0",
+								"image",
+								"filterImage"
+							],
+							"query": [
+								{
+									"key": "image_url",
+									"value": "https://www.carlrippon.com/static/7afad7912a3c4797f5cfd1798fa1bf83/e937d/animal-canine-cold-1800314-1024x683.jpg"
+								}
+							]
+						},
+						"description": "Post a new item to the feed"
+					},
+					"response": []
+				},
+				{
+					"name": "Put an object in to the S3 bucket",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "image/jpeg",
+								"type": "text"
+							},
+							{
+								"key": "Transfer-Encoding",
+								"value": "image/jpeg",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/Users/czarek/Pictures/lenka-276-20161206-1.jpg"
+							}
+						},
+						"url": {
+							"raw": "https://udagrammediadev.s3.eu-central-1.amazonaws.com/lena.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA5ZZA7Y5UCRLCFTX5%2F20200402%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20200402T221501Z&X-Amz-Expires=300&X-Amz-Signature=29bc1f6d1383a949b915b4ec6798641762f95ed46efc46c56bc1bdb52002aafc&X-Amz-SignedHeaders=host",
+							"protocol": "https",
+							"host": [
+								"udagrammediadev",
+								"s3",
+								"eu-central-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"lena.jpg"
+							],
+							"query": [
+								{
+									"key": "X-Amz-Algorithm",
+									"value": "AWS4-HMAC-SHA256"
+								},
+								{
+									"key": "X-Amz-Credential",
+									"value": "AKIA5ZZA7Y5UCRLCFTX5%2F20200402%2Feu-central-1%2Fs3%2Faws4_request"
+								},
+								{
+									"key": "X-Amz-Date",
+									"value": "20200402T221501Z"
+								},
+								{
+									"key": "X-Amz-Expires",
+									"value": "300"
+								},
+								{
+									"key": "X-Amz-Signature",
+									"value": "29bc1f6d1383a949b915b4ec6798641762f95ed46efc46c56bc1bdb52002aafc"
+								},
+								{
+									"key": "X-Amz-SignedHeaders",
+									"value": "host"
+								}
+							]
+						},
+						"description": "Put an object in to the S3 bucket using signed URL"
+					},
+					"response": []
 				}
 			],
 			"auth": {
@@ -601,7 +840,8 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -633,5 +873,6 @@
 			"value": "http://localhost:8080",
 			"type": "string"
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
