@@ -1,14 +1,3 @@
-import dotenv from 'dotenv';
-import fs from 'fs';
-
-dotenv.config();
-
-const envConf = dotenv.parse(fs.readFileSync('dev.env'));
-
-for (const k in envConf) {
-  process.env[k] = envConf[k];
-}
-
 export const config = {
   "dev": {
     "username": process.env.DB_USERNAME,
